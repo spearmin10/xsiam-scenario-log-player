@@ -183,6 +183,13 @@ configuration:
   - adaptive
   - always
   additionalinfo: Default = None (Transportation Format is applied).
+- section: Syslog Collector
+  display: Raw Log to CEF
+  name: syslog_raw_log_to_cef
+  defaultvalue: "true"
+  type: 8
+  required: false
+  additionalinfo: Convert non-CEF logs to CEF format to send logs
 - section: Default Scenario
   advanced: true
   display: Default Scenario List
@@ -1840,6 +1847,7 @@ script:
             self.__syslog_transport_protocol = params.get('syslog_transport_protocol') or 'UDP'
             self.__syslog_transport_format = params.get('syslog_transport_format') or SyslogHeaderType.RFC_5424
             self.__syslog_transport_enforce_log_spec_format = params.get('syslog_transport_enforce_log_spec_format') or None
+            self.__syslog_raw_log_to_cef = argToBoolean(params.get('syslog_raw_log_to_cef', 'true'))
 
             ''' SECTION: Default Scenario '''
             self.__default_scenario_list = argToList(params.get('default_scenario_list'))
@@ -2014,6 +2022,12 @@ script:
             self,
         ) -> str | None:
             return self.__syslog_transport_enforce_log_spec_format
+
+        @property
+        def syslog_raw_log_to_cef(
+            self,
+        ) -> bool:
+            return self.__syslog_raw_log_to_cef
 
         @property
         def scenario_enable_resume_scheduled_jobs(
@@ -4167,12 +4181,20 @@ script:
             :param bypass_rate_limit: Set to True to bypass the rate limit for the log, otherwise set to False.
             """
             if not self.__done and self.__syslog_sender:
-                msg = log.build_raw(
-                    log.get_preferred_syslog_header_format(
-                        self.__settings.syslog_transport_format,
-                        self.__settings.syslog_transport_enforce_log_spec_format,
+                if self.__settings.syslog_raw_log_to_cef:
+                    msg = log.build_cef(
+                        log.get_preferred_syslog_header_format(
+                            self.__settings.syslog_transport_format,
+                            self.__settings.syslog_transport_enforce_log_spec_format,
+                        )
                     )
-                )
+                else:
+                    msg = log.build_raw(
+                        log.get_preferred_syslog_header_format(
+                            self.__settings.syslog_transport_format,
+                            self.__settings.syslog_transport_enforce_log_spec_format,
+                        )
+                    )
                 await self.__syslog_sender.send_log(
                     msg,
                     bypass_rate_limit=bypass_rate_limit,
