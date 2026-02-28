@@ -148,14 +148,30 @@ configuration:
   type: 8
   required: false
 - section: Syslog Collector
-  display: Syslog Server
-  name: syslog_transport_address
+  display: Syslog Server (RAW Logs)
+  name: syslog_transport_address_raw
   type: 0
   required: false
   additionalinfo: 'e.g. 192.168.1.2:514 (Default Port: 514)'
 - section: Syslog Collector
   display: Protocol
-  name: syslog_transport_protocol
+  name: syslog_transport_protocol_raw
+  defaultvalue: UDP
+  type: 15
+  required: true
+  options:
+  - UDP
+  - TCP
+  - SSL
+- section: Syslog Collector
+  display: Syslog Server (CEF Logs)
+  name: syslog_transport_address_cef
+  type: 0
+  required: false
+  additionalinfo: 'e.g. 192.168.1.2:514 (Default Port: 514)'
+- section: Syslog Collector
+  display: Protocol
+  name: syslog_transport_protocol_cef
   defaultvalue: UDP
   type: 15
   required: true
@@ -184,11 +200,17 @@ configuration:
   - always
   additionalinfo: Default = None (Transportation Format is applied).
 - section: Syslog Collector
-  display: Raw Log to CEF
-  name: syslog_raw_log_to_cef
-  defaultvalue: "true"
-  type: 8
+  advanced: true
+  display: Forced CEF Log Sources
+  name: syslog_forced_cef_log_sources
+  type: 16
   required: false
+  options:
+  - unknown_unknown
+  - isc_bind
+  - squid_squid
+  - apache_httpd
+  - cisco_asa
   additionalinfo: Convert non-CEF logs to CEF format to send logs
 - section: Default Scenario
   advanced: true
@@ -1832,22 +1854,35 @@ script:
 
             ''' SECTION: Syslog Collector '''
             self.__syslog_transport_enable = argToBoolean(params.get('syslog_transport_enable', 'false'))
-            if addr := params.get('syslog_transport_address'):
+            if addr := params.get('syslog_transport_address_raw'):
                 if m := re.fullmatch(r'(?P<host>[^:]+)(?::(?P<port>\d+))?', addr.strip()):
                     host = m['host']
                     port = int(m['port'] or 514)
                     if port > 65535:
                         raise DemistoException(f'Invalid port number of the syslog address - {port}')
-                    self.__syslog_transport_address: tuple[str, int] | None = (host, port)
+                    self.__syslog_transport_address_raw: tuple[str, int] | None = (host, port)
                 else:
                     raise DemistoException(f'Invalid syslog address - {addr}')
             else:
-                self.__syslog_transport_address = None
+                self.__syslog_transport_address_raw = None
 
-            self.__syslog_transport_protocol = params.get('syslog_transport_protocol') or 'UDP'
+            if addr := params.get('syslog_transport_address_cef'):
+                if m := re.fullmatch(r'(?P<host>[^:]+)(?::(?P<port>\d+))?', addr.strip()):
+                    host = m['host']
+                    port = int(m['port'] or 514)
+                    if port > 65535:
+                        raise DemistoException(f'Invalid port number of the syslog address - {port}')
+                    self.__syslog_transport_address_cef: tuple[str, int] | None = (host, port)
+                else:
+                    raise DemistoException(f'Invalid syslog address - {addr}')
+            else:
+                self.__syslog_transport_address_cef = None
+
+            self.__syslog_transport_protocol_raw = params.get('syslog_transport_protocol_raw') or 'UDP'
+            self.__syslog_transport_protocol_cef = params.get('syslog_transport_protocol_cef') or 'UDP'
             self.__syslog_transport_format = params.get('syslog_transport_format') or SyslogHeaderType.RFC_5424
             self.__syslog_transport_enforce_log_spec_format = params.get('syslog_transport_enforce_log_spec_format') or None
-            self.__syslog_raw_log_to_cef = argToBoolean(params.get('syslog_raw_log_to_cef', 'true'))
+            self.__syslog_forced_cef_log_sources = argToList(params.get('syslog_forced_cef_log_sources'))
 
             ''' SECTION: Default Scenario '''
             self.__default_scenario_list = argToList(params.get('default_scenario_list'))
@@ -2000,16 +2035,28 @@ script:
             return self.__syslog_transport_enable
 
         @property
-        def syslog_transport_address(
+        def syslog_transport_address_raw(
             self,
         ) -> tuple[str, int] | None:
-            return self.__syslog_transport_address
+            return self.__syslog_transport_address_raw
 
         @property
-        def syslog_transport_protocol(
+        def syslog_transport_protocol_raw(
             self,
         ) -> str:
-            return self.__syslog_transport_protocol
+            return self.__syslog_transport_protocol_raw
+
+        @property
+        def syslog_transport_address_cef(
+            self,
+        ) -> tuple[str, int] | None:
+            return self.__syslog_transport_address_cef
+
+        @property
+        def syslog_transport_protocol_cef(
+            self,
+        ) -> str:
+            return self.__syslog_transport_protocol_cef
 
         @property
         def syslog_transport_format(
@@ -2024,10 +2071,10 @@ script:
             return self.__syslog_transport_enforce_log_spec_format
 
         @property
-        def syslog_raw_log_to_cef(
+        def syslog_forced_cef_log_sources(
             self,
-        ) -> bool:
-            return self.__syslog_raw_log_to_cef
+        ) -> list[str]:
+            return self.__syslog_forced_cef_log_sources
 
         @property
         def scenario_enable_resume_scheduled_jobs(
@@ -2230,20 +2277,21 @@ script:
             if not (v := info.get(k)):
                 continue
             if value_type == 'log_stats' and isinstance(v, dict):
-                for hec_type in ('raw', 'cef'):
-                    if attrs := v.get(f'hec_{hec_type}'):
+                for lf_type in ('raw', 'cef'):
+                    if attrs := v.get(f'hec_{lf_type}'):
                         finished = attrs.get('finished')
                         nlogs_queued = int(attrs.get('queued') or 0)
                         nlogs_sent = int(attrs.get('sent') or 0)
                         prefix = '' if finished or nlogs_queued + nlogs_sent == 0 else '> '
-                        out[f'Log Stats - HEC {hec_type.upper()} (queued)'] = f'{prefix}{nlogs_queued:,}'
-                        out[f'Log Stats - HEC {hec_type.upper()} (sent)'] = f'{prefix}{nlogs_sent:,}'
+                        out[f'Log Stats - HEC {lf_type.upper()} (queued)'] = f'{prefix}{nlogs_queued:,}'
+                        out[f'Log Stats - HEC {lf_type.upper()} (sent)'] = f'{prefix}{nlogs_sent:,}'
 
-                if attrs := v.get('syslog'):
-                    finished = attrs.get('finished')
-                    nlogs_sent = int(attrs.get('sent') or 0)
-                    prefix = '' if finished or nlogs_sent == 0 else '> '
-                    out['Log Stats - Syslog'] = f'{prefix}{nlogs_sent:,}'
+                for lf_type in ('raw', 'cef'):
+                    if attrs := v.get(f'syslog_{lf_type}'):
+                        finished = attrs.get('finished')
+                        nlogs_sent = int(attrs.get('sent') or 0)
+                        prefix = '' if finished or nlogs_sent == 0 else '> '
+                        out[f'Log Stats - Syslog {lf_type.upper()}'] = f'{prefix}{nlogs_sent:,}'
 
             elif value_type == 'jobs' and isinstance(v, dict):
                 if waiting_jobs := list(filter(lambda x: 'next_time' in x, to_list(v.get('waiting')))):
@@ -3468,6 +3516,18 @@ script:
         ) -> str:
             return self.__preferred_log_format
 
+        @property
+        def cef_vendor(
+            self,
+        ) -> str:
+            return self.__cef_vendor
+
+        @property
+        def cef_product(
+            self,
+        ) -> str:
+            return self.__cef_product
+
         def get_preferred_syslog_header_format(
             self,
             default_syslog_format: str | None,
@@ -4055,29 +4115,45 @@ script:
                 self.__hc_cef_sender = None
 
             if settings.syslog_transport_enable:
-                if not settings.syslog_transport_address:
-                    raise DemistoException('Syslog Address is not configured.')
-
-                syslog_host, syslog_port = settings.syslog_transport_address
-                self.__syslog_sender: SyslogLogSender | None = SyslogLogSender(
-                    protocol=settings.syslog_transport_protocol,
-                    host=syslog_host,
-                    port=syslog_port,
-                    timeout=settings.socket_timeout,
-                    insecure=settings.insecure,
-                    rate_limit=settings.rate_limit
-                )
+                if settings.syslog_transport_address_raw:
+                    syslog_host, syslog_port = settings.syslog_transport_address_raw
+                    self.__syslog_raw_sender: SyslogLogSender | None = SyslogLogSender(
+                        protocol=settings.syslog_transport_protocol_raw,
+                        host=syslog_host,
+                        port=syslog_port,
+                        timeout=settings.socket_timeout,
+                        insecure=settings.insecure,
+                        rate_limit=settings.rate_limit
+                    )
+                else:
+                    self.__syslog_raw_sender = None
+                
+                if settings.syslog_transport_address_cef:
+                    syslog_host, syslog_port = settings.syslog_transport_address_cef
+                    self.__syslog_cef_sender: SyslogLogSender | None = SyslogLogSender(
+                        protocol=settings.syslog_transport_protocol_cef,
+                        host=syslog_host,
+                        port=syslog_port,
+                        timeout=settings.socket_timeout,
+                        insecure=settings.insecure,
+                        rate_limit=settings.rate_limit
+                    )
+                else:
+                    self.__syslog_cef_sender = None
             else:
-                self.__syslog_sender = None
+                self.__syslog_raw_sender = None
+                self.__syslog_cef_sender = None
 
             if not any([
-                self.__syslog_sender,
+                self.__syslog_raw_sender,
+                self.__syslog_cef_sender,
                 self.__hc_raw_sender,
                 self.__hc_cef_sender
             ]):
                 raise DemistoException('No logging targets are configured.')
 
-            self.__cnt_syslog = 0
+            self.__cnt_raw_syslog = 0
+            self.__cnt_cef_syslog = 0
 
         async def __aenter__(
             self,
@@ -4095,7 +4171,8 @@ script:
                 for s in filter(None, [
                     self.__hc_raw_sender,
                     self.__hc_cef_sender,
-                    self.__syslog_sender,
+                    self.__syslog_raw_sender,
+                    self.__syslog_cef_sender,
                 ]):
                     await s.finish()
 
@@ -4116,9 +4193,15 @@ script:
                     'sent': self.__hc_cef_sender.nlogs_sent,
                     'finished': final,
                 }
-            if self.__syslog_sender:
-                log_stats['syslog'] = {
-                    'sent': self.__cnt_syslog,
+            if self.__syslog_raw_sender:
+                log_stats['syslog_raw'] = {
+                    'sent': self.__cnt_raw_syslog,
+                    'finished': final,
+                }
+
+            if self.__syslog_cef_sender:
+                log_stats['syslog_cef'] = {
+                    'sent': self.__cnt_cef_syslog,
                     'finished': final,
                 }
 
@@ -4170,7 +4253,7 @@ script:
                     bypass_rate_limit=bypass_rate_limit,
                 )
 
-        async def __send_log_syslog(
+        async def __send_log_syslog_raw(
             self,
             log: LogEncoder,
             bypass_rate_limit: bool = False,
@@ -4180,26 +4263,41 @@ script:
             :param log: An event log
             :param bypass_rate_limit: Set to True to bypass the rate limit for the log, otherwise set to False.
             """
-            if not self.__done and self.__syslog_sender:
-                if self.__settings.syslog_raw_log_to_cef:
-                    msg = log.build_cef(
-                        log.get_preferred_syslog_header_format(
-                            self.__settings.syslog_transport_format,
-                            self.__settings.syslog_transport_enforce_log_spec_format,
-                        )
+            if not self.__done and self.__syslog_raw_sender:
+                msg = log.build_raw(
+                    log.get_preferred_syslog_header_format(
+                        self.__settings.syslog_transport_format,
+                        self.__settings.syslog_transport_enforce_log_spec_format,
                     )
-                else:
-                    msg = log.build_raw(
-                        log.get_preferred_syslog_header_format(
-                            self.__settings.syslog_transport_format,
-                            self.__settings.syslog_transport_enforce_log_spec_format,
-                        )
-                    )
-                await self.__syslog_sender.send_log(
+                )
+                await self.__syslog_raw_sender.send_log(
                     msg,
                     bypass_rate_limit=bypass_rate_limit,
                 )
-                self.__cnt_syslog += 1
+                self.__cnt_raw_syslog += 1
+
+        async def __send_log_syslog_cef(
+            self,
+            log: LogEncoder,
+            bypass_rate_limit: bool = False,
+        ) -> None:
+            """ Send an event log
+
+            :param log: An event log
+            :param bypass_rate_limit: Set to True to bypass the rate limit for the log, otherwise set to False.
+            """
+            if not self.__done and self.__syslog_cef_sender:
+                msg = log.build_cef(
+                    log.get_preferred_syslog_header_format(
+                        self.__settings.syslog_transport_format,
+                        self.__settings.syslog_transport_enforce_log_spec_format,
+                    )
+                )
+                await self.__syslog_cef_sender.send_log(
+                    msg,
+                    bypass_rate_limit=bypass_rate_limit,
+                )
+                self.__cnt_cef_syslog += 1
 
         async def send_log(
             self,
@@ -4243,8 +4341,37 @@ script:
                     log,
                     bypass_rate_limit=bypass_rate_limit,
                 )
-            if self.__syslog_sender:
-                await self.__send_log_syslog(
+
+            if log.preferred_log_format == 'cef' and self.__syslog_cef_sender:
+                await self.__send_log_syslog_cef(
+                    log,
+                    bypass_rate_limit=bypass_rate_limit,
+                )
+            elif (
+                self.__syslog_cef_sender
+                and log.preferred_log_format == 'raw'
+                and (
+                    f'{log.cef_vendor.lower()}_{log.cef_product.lower()}'
+                    in
+                    self.__settings.syslog_forced_cef_log_sources
+                )
+            ):
+                await self.__send_log_syslog_cef(
+                    log,
+                    bypass_rate_limit=bypass_rate_limit,
+                )
+            elif log.preferred_log_format == 'raw' and self.__syslog_raw_sender:
+                await self.__send_log_syslog_raw(
+                    log,
+                    bypass_rate_limit=bypass_rate_limit,
+                )
+            elif self.__syslog_cef_sender:
+                await self.__send_log_syslog_cef(
+                    log,
+                    bypass_rate_limit=bypass_rate_limit,
+                )
+            elif self.__syslog_raw_sender:
+                await self.__send_log_syslog_raw(
                     log,
                     bypass_rate_limit=bypass_rate_limit,
                 )
@@ -4274,7 +4401,8 @@ script:
                 for s in filter(None, [
                     self.__hc_raw_sender,
                     self.__hc_cef_sender,
-                    self.__syslog_sender,
+                    self.__syslog_raw_sender,
+                    self.__syslog_cef_sender,
                 ]):
                     await s.finish()
                 self.__update_stats(True)
@@ -4309,8 +4437,11 @@ script:
         ) -> None:
             """ Test connectivity
             """
-            if self.__syslog_sender:
-                await self.__syslog_sender.init()
+            for s in filter(None, [
+                self.__syslog_raw_sender,
+                self.__syslog_cef_sender,
+            ]):
+                await s.init()
 
             for s in filter(None, [
                 self.__hc_raw_sender,
