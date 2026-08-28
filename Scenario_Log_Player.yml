@@ -6,6 +6,7 @@ name: Scenario Log Player
 display: Scenario Log Player
 category: Utilities
 image: data:image/png;base64,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
+imagepath: xsoar-files://xsoar/images/Scenario_Log_Player_b1211b3f-75d7-4302-8e6e-1b2dd0a484bf.png
 description: |-
   The integration emulates activities within an organization's infrastructure based on scenario templates, generates activity logs resulting from these activities, and sends the logs to log receivers.
   It supports XDR/XSIAM HTTP Collector and Syslog Collector as log receivers.
@@ -41,27 +42,31 @@ detaileddescription: |-
     - dataset = squid_squid_raw
     - dataset = apache_httpd_raw
 configuration:
-- section: Connect
+- supportedModules: []
+  section: Connect
   display: Long Running Instance
   name: longRunning
   defaultvalue: "true"
   type: 8
   required: false
-- section: Connect
+- supportedModules: []
+  section: Connect
   advanced: true
   display: Trust any certificate (not secure)
   name: insecure
   defaultvalue: "false"
   type: 8
   required: false
-- section: Connect
+- supportedModules: []
+  section: Connect
   advanced: true
   display: Use system proxy settings
   name: proxy
   defaultvalue: "false"
   type: 8
   required: false
-- section: Connect
+- supportedModules: []
+  section: Connect
   advanced: true
   display: Log Sending Rate Limit
   name: rate_limit
@@ -69,7 +74,8 @@ configuration:
   type: 0
   required: false
   additionalinfo: 0 = unlimited, default unit = Mbps
-- section: Connect
+- supportedModules: []
+  section: Connect
   advanced: true
   display: Allow rate limit bursting in specific scenarios
   name: rate_limit_burst
@@ -77,35 +83,41 @@ configuration:
   type: 8
   required: false
   additionalinfo: The rate limit is not applicable to the jobs.
-- section: XSIAM HTTP Collector
+- supportedModules: []
+  section: XSIAM HTTP Collector
   display: Enable
   name: xsiam_hc_enable
   defaultvalue: "false"
   type: 8
   required: false
-- section: XSIAM HTTP Collector
+- supportedModules: []
+  section: XSIAM HTTP Collector
   display: XSIAM API endpoints
   name: xsiam_api_url
   type: 0
   required: false
-- section: XSIAM HTTP Collector
+- supportedModules: []
+  section: XSIAM HTTP Collector
   display: API Key for RAW log
   name: xsiam_hc_api_key_raw
   type: 4
   required: false
-- section: XSIAM HTTP Collector
+- supportedModules: []
+  section: XSIAM HTTP Collector
   display: API Key for CEF log
   name: xsiam_hc_api_key_cef
   type: 4
   required: false
-- section: XSIAM HTTP Collector
+- supportedModules: []
+  section: XSIAM HTTP Collector
   display: Enable compression in gzip to upload events
   name: xsiam_hc_compression
   defaultvalue: "true"
   type: 8
   required: false
   additionalinfo: Default = true
-- section: XSIAM HTTP Collector
+- supportedModules: []
+  section: XSIAM HTTP Collector
   advanced: true
   display: Transportation Format
   name: xsiam_hc_transportation_format
@@ -115,7 +127,8 @@ configuration:
   - RFC 3164
   - RFC 5424
   additionalinfo: Default = None (No headers are added to logs)
-- section: XSIAM HTTP Collector
+- supportedModules: []
+  section: XSIAM HTTP Collector
   advanced: true
   display: Enforce Log-specific Syslog Format
   name: xsiam_hc_enforce_log_spec_syslog_format
@@ -126,14 +139,16 @@ configuration:
   - always
   additionalinfo: Default = None (Transportation Format is applied). Adaptive = Log-specific
     syslog headers are enforced only when the Transportation Format is specified.
-- section: XSIAM HTTP Collector
+- supportedModules: []
+  section: XSIAM HTTP Collector
   display: Raw Log to CEF
   name: xsiam_hc_raw_log_to_cef
   defaultvalue: "true"
   type: 8
   required: false
   additionalinfo: Convert non-CEF logs to CEF format to send logs
-- section: XSIAM HTTP Collector
+- supportedModules: []
+  section: XSIAM HTTP Collector
   advanced: true
   display: Upload buffer size
   name: xsiam_hc_buffer_size
@@ -141,19 +156,22 @@ configuration:
   type: 0
   required: true
   additionalinfo: Max - 15MB
-- section: Syslog Collector
+- supportedModules: []
+  section: Syslog Collector
   display: Enable
   name: syslog_transport_enable
   defaultvalue: "false"
   type: 8
   required: false
-- section: Syslog Collector
+- supportedModules: []
+  section: Syslog Collector
   display: Syslog Server (RAW Logs)
   name: syslog_transport_address_raw
   type: 0
   required: false
   additionalinfo: 'e.g. 192.168.1.2:514 (Default Port: 514)'
-- section: Syslog Collector
+- supportedModules: []
+  section: Syslog Collector
   display: Protocol
   name: syslog_transport_protocol_raw
   defaultvalue: UDP
@@ -163,13 +181,15 @@ configuration:
   - UDP
   - TCP
   - SSL
-- section: Syslog Collector
+- supportedModules: []
+  section: Syslog Collector
   display: Syslog Server (CEF Logs)
   name: syslog_transport_address_cef
   type: 0
   required: false
   additionalinfo: 'e.g. 192.168.1.2:514 (Default Port: 514)'
-- section: Syslog Collector
+- supportedModules: []
+  section: Syslog Collector
   display: Protocol
   name: syslog_transport_protocol_cef
   defaultvalue: UDP
@@ -179,7 +199,8 @@ configuration:
   - UDP
   - TCP
   - SSL
-- section: Syslog Collector
+- supportedModules: []
+  section: Syslog Collector
   advanced: true
   display: Syslog Format
   name: syslog_transport_format
@@ -189,7 +210,8 @@ configuration:
   options:
   - RFC 3164
   - RFC 5424
-- section: Syslog Collector
+- supportedModules: []
+  section: Syslog Collector
   advanced: true
   display: Enforce Log-specific Syslog Format
   name: syslog_transport_enforce_log_spec_format
@@ -199,7 +221,8 @@ configuration:
   - adaptive
   - always
   additionalinfo: Default = None (Transportation Format is applied).
-- section: Syslog Collector
+- supportedModules: []
+  section: Syslog Collector
   advanced: true
   display: Forced CEF Log Sources
   name: syslog_forced_cef_log_sources
@@ -212,7 +235,8 @@ configuration:
   - apache_httpd
   - cisco_asa
   additionalinfo: Convert non-CEF logs to CEF format to send logs
-- section: Default Scenario
+- supportedModules: []
+  section: Default Scenario
   advanced: true
   display: Default Scenario List
   name: default_scenario_list
@@ -223,7 +247,8 @@ configuration:
   - normal
   - anomaly
   additionalinfo: Choose the default scenarios to use
-- section: Default Scenario
+- supportedModules: []
+  section: Default Scenario
   advanced: true
   display: Tap products - Internal Network
   name: default_scenario_internal_tap_products
@@ -235,7 +260,8 @@ configuration:
   - checkpoint-fw
   - fortigate
   additionalinfo: Tap products in the internal network
-- section: Default Scenario
+- supportedModules: []
+  section: Default Scenario
   advanced: true
   display: Squid Log Format - Internal Network
   name: default_scenario_internal_proxy_squid_log_formats
@@ -247,7 +273,8 @@ configuration:
   - common
   - combined
   additionalinfo: Log format of the squid proxy in the internal network
-- section: Default Scenario
+- supportedModules: []
+  section: Default Scenario
   advanced: true
   display: Apache HTTPd Log Format - Internal Network
   name: default_scenario_internal_web_apache_log_formats
@@ -258,7 +285,8 @@ configuration:
   - common
   - combined
   additionalinfo: Log format of the apache httpd in the internal network
-- section: Default Scenario
+- supportedModules: []
+  section: Default Scenario
   advanced: true
   display: Tap products - External Network
   name: default_scenario_external_tap_products
@@ -268,7 +296,8 @@ configuration:
   options:
   - zscaler-nssweb
   additionalinfo: Tap products in the external network
-- section: Default Scenario
+- supportedModules: []
+  section: Default Scenario
   advanced: true
   display: Proxy Products - External Network
   name: default_scenario_external_proxy_products
@@ -277,46 +306,53 @@ configuration:
   options:
   - zscaler-nssweb
   additionalinfo: Proxy products in the external network
-- section: Custom Scenario
+- supportedModules: []
+  section: Custom Scenario
   advanced: true
   display: Enable
   name: custom_scenario_enable
   defaultvalue: "false"
   type: 8
   required: false
-- section: Custom Scenario
+- supportedModules: []
+  section: Custom Scenario
   advanced: true
   display: Scenario JSON
   name: custom_scenario_json
   type: 12
   required: false
-- section: Custom Scenario
+- supportedModules: []
+  section: Custom Scenario
   advanced: true
   display: Scenario URLs
   name: custom_scenario_urls
   type: 12
   required: false
-- section: Custom Scenario
+- supportedModules: []
+  section: Custom Scenario
   advanced: true
   display: Username
   displaypassword: Password
   name: custom_scenario_urls_creds
   type: 9
   required: false
-- section: Custom Scenario
+- supportedModules: []
+  section: Custom Scenario
   advanced: true
   display: ZIP Password
   name: custom_scenario_urls_zip_password
   type: 4
   required: false
-- section: Custom Scenario
+- supportedModules: []
+  section: Custom Scenario
   advanced: true
   display: Merge with the default scenario
   name: custom_scenario_merge
   defaultvalue: "false"
   type: 8
   required: false
-- section: Scenario
+- supportedModules: []
+  section: Scenario
   advanced: true
   display: Enable Auto Resume Jobs
   name: scenario_enable_resume_scheduled_jobs
@@ -325,7 +361,8 @@ configuration:
   required: false
   additionalinfo: Enable to resume scheduled times for scheduled jobs when the last
     run didn't finish
-- section: Scenario
+- supportedModules: []
+  section: Scenario
   advanced: true
   display: Scenario Run Mode
   name: scenario_run_mode
@@ -335,21 +372,24 @@ configuration:
   options:
   - random
   - sequential
-- section: Scenario
+- supportedModules: []
+  section: Scenario
   advanced: true
   display: Number of loop count to play scenarios (sources)
   name: scenario_sources_loop
   type: 0
   required: false
   additionalinfo: blank - endless if sources exist in the scenario.
-- section: Scenario
+- supportedModules: []
+  section: Scenario
   advanced: true
   display: Number of loop count to play scenarios (jobs)
   name: scenario_jobs_loop
   type: 0
   required: false
   additionalinfo: blank - endless if jobs exist in the scenario.
-- section: Syslog Format
+- supportedModules: []
+  section: Syslog Format
   advanced: true
   display: Preferred Syslog Headers
   name: syslog_preferred_headers
@@ -358,7 +398,8 @@ configuration:
   required: false
   additionalinfo: Log-specific preferred syslog header format. The settings are applied
     by syslog header enforcement.
-- section: Syslog Format
+- supportedModules: []
+  section: Syslog Format
   advanced: true
   display: Syslog Falicity
   name: syslog_facility
@@ -387,7 +428,8 @@ configuration:
   - local6
   - local7
   additionalinfo: Default = local0
-- section: Syslog Format
+- supportedModules: []
+  section: Syslog Format
   advanced: true
   display: Syslog Severity
   name: syslog_severity
@@ -404,7 +446,8 @@ configuration:
   - info
   - debug
   additionalinfo: Default = info
-- section: Miscellaneous
+- supportedModules: []
+  section: Miscellaneous
   advanced: true
   display: Logging Time Zone Offset
   name: timezone_logging
@@ -412,7 +455,8 @@ configuration:
   type: 0
   required: false
   additionalinfo: Default = +00:00
-- section: Miscellaneous
+- supportedModules: []
+  section: Miscellaneous
   advanced: true
   display: Display Time Zone Offset
   name: timezone_display
@@ -420,27 +464,42 @@ configuration:
   type: 0
   required: false
   additionalinfo: Default = +00:00
-- section: Miscellaneous
+- supportedModules: []
+  section: Miscellaneous
   advanced: true
   display: Enable Alert Creation
   name: enable_alert_creation
   defaultvalue: "false"
   type: 8
   required: false
-- display: Alert type
+- supportedModules: []
+  section: Miscellaneous
+  advanced: true
+  display: Log Product Allowlist
+  name: log_product_allowlist
+  type: 0
+  required: false
+  additionalinfo: Defines an allowlist of log products to filter incoming logs. (e.g.
+    ngfw, checkpoint-fw, fortigate, zscaler-nssweb, squid, bind, apache-httpd, windows-event,
+    windows-dhcp)
+- supportedModules: []
+  display: Alert type
   name: alertType
   type: 13
   required: false
-- display: Alerts Fetch Interval
+- supportedModules: []
+  display: Alerts Fetch Interval
   name: alertFetchInterval
   defaultvalue: "1"
   type: 19
   required: false
 script:
   commands:
-  - name: slp-get-running-status
+  - supportedModules: []
+    name: slp-get-running-status
     arguments:
-    - name: show_only
+    - supportedModules: []
+      name: show_only
       auto: PREDEFINED
       predefined:
       - "true"
@@ -450,15 +509,19 @@ script:
     - contextPath: ScenarioLogPlayer.RunningStatus
       description: The running status information
     description: Get the running information
-  - name: slp-var-datetime
+  - supportedModules: []
+    name: slp-var-datetime
     arguments:
-    - name: entry_id
+    - supportedModules: []
+      name: entry_id
       required: true
       description: The entry ID of a file
     description: Replace date time values with date time variables
-  - name: slp-get-last-error
+  - supportedModules: []
+    name: slp-get-last-error
     arguments:
-    - name: show_only
+    - supportedModules: []
+      name: show_only
       auto: PREDEFINED
       predefined:
       - "true"
@@ -468,9 +531,11 @@ script:
     - contextPath: ScenarioLogPlayer.LastError
       description: The last error information
     description: Get the last error information
-  - name: slp-get-last-run
+  - supportedModules: []
+    name: slp-get-last-run
     arguments:
-    - name: show_only
+    - supportedModules: []
+      name: show_only
       auto: PREDEFINED
       predefined:
       - "true"
@@ -480,9 +545,11 @@ script:
     - contextPath: ScenarioLogPlayer.LastRun
       description: The last run information
     description: Get the last run information
-  - name: slp-get-jobs-status
+  - supportedModules: []
+    name: slp-get-jobs-status
     arguments:
-    - name: show_only
+    - supportedModules: []
+      name: show_only
       auto: PREDEFINED
       predefined:
       - "true"
@@ -493,21 +560,27 @@ script:
       description: The information about running and scheduled jobs
       type: unknown
     description: Get the information about running and scheduled jobs
-  - name: slp-reset-status
+  - supportedModules: []
+    name: slp-reset-status
     arguments: []
     description: Reset all the status information
-  - name: slp-get-default-scenario
+  - supportedModules: []
+    name: slp-get-default-scenario
     arguments:
-    - name: save_as
+    - supportedModules: []
+      name: save_as
       description: The name to give the file to save
       defaultValue: default-scenario.json
     description: Get the default scenario template
-  - name: slp-build-scenario-from-logs
+  - supportedModules: []
+    name: slp-build-scenario-from-logs
     arguments:
-    - name: entry_id
+    - supportedModules: []
+      name: entry_id
       required: true
       description: The entry ID of a log file
-    - name: var_datetime
+    - supportedModules: []
+      name: var_datetime
       auto: PREDEFINED
       predefined:
       - "true"
@@ -515,7 +588,8 @@ script:
       description: Set true to replace date time values with date time variables,
         otherwise set false.
       defaultValue: "true"
-    - name: individual
+    - supportedModules: []
+      name: individual
       auto: PREDEFINED
       predefined:
       - "true"
@@ -523,7 +597,8 @@ script:
       description: Set to true to make an individual entry for each log, otherwise
         set to false.
       defaultValue: "true"
-    - name: log_format
+    - supportedModules: []
+      name: log_format
       auto: PREDEFINED
       predefined:
       - raw
@@ -531,13 +606,16 @@ script:
       - json
       description: Log Format
       defaultValue: raw
-    - name: cef_vendor
+    - supportedModules: []
+      name: cef_vendor
       description: Preferred CEF vendor
       defaultValue: unknown
-    - name: cef_product
+    - supportedModules: []
+      name: cef_product
       description: Preferred CEF product
       defaultValue: unknown
-    - name: save_as
+    - supportedModules: []
+      name: save_as
       description: The name to give the scenario template file to save.
     description: Build a scenario template from a log file
   script: |
@@ -1829,6 +1907,7 @@ script:
             self.__enable_alert_creation = argToBoolean(
                 params.get('enable_alert_creation', 'false')
             )
+            self.__log_product_allowlist = argToList(params.get('log_product_allowlist'))
 
             ''' SECTION: XSIAM HTTP Collector '''
             self.__xsiam_hc_enable = argToBoolean(params.get('xsiam_hc_enable', 'true'))
@@ -1955,6 +2034,12 @@ script:
             self,
         ) -> bool:
             return self.__enable_alert_creation
+
+        @property
+        def log_product_allowlist(
+            self,
+        ) -> list[str]:
+            return self.__log_product_allowlist
 
         @property
         def socket_timeout(
@@ -4127,7 +4212,7 @@ script:
                     )
                 else:
                     self.__syslog_raw_sender = None
-                
+
                 if settings.syslog_transport_address_cef:
                     syslog_host, syslog_port = settings.syslog_transport_address_cef
                     self.__syslog_cef_sender: SyslogLogSender | None = SyslogLogSender(
@@ -4511,6 +4596,22 @@ script:
     class LogGenerator(metaclass = ABCMeta):
         """ Log Generator
         """
+        def __init__(
+            self,
+            log_product: str,
+        ) -> None:
+            """ Initialize the log generator instance
+
+            :param log_product: The log product.
+            """
+            self.__log_product = log_product
+
+        @property
+        def log_product(
+            self
+        ) -> str:
+            return self.__log_product
+
         @abstractmethod
         def generate(
             self,
@@ -4526,13 +4627,17 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
             format_type: str
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             :param format_type: 'traffic'
             """
+            super().__init__(log_product)
+
             self.__settings = settings
             self.__format_type = format_type
             self.__preferred_syslog_header = settings.syslog_preferred_headers.get('checkpoint') or None
@@ -4578,13 +4683,17 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
             format_type: str
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             :param format_type: 'traffic'
             """
+            super().__init__(log_product)
+
             self.__settings = settings
             self.__format_type = format_type
             self.__preferred_syslog_header = settings.syslog_preferred_headers.get('fortigate') or None
@@ -4682,13 +4791,17 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
             log_type: str
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             :param log_type: 'traffic', 'threat' or 'url'
             """
+            super().__init__(log_product)
+
             if log_type not in ('traffic', 'threat', 'url'):
                 raise DemistoException(f'Invalid log type - {log_type}')
 
@@ -5043,13 +5156,17 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
             log_type: str,
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             :param log_type: 'web'
             """
+            super().__init__(log_product)
+
             if log_type not in ('web'):
                 raise DemistoException(f'Invalid log type - {log_type}')
 
@@ -5183,13 +5300,17 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
             format_type: str
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             :param format_type: 'squid', common' or 'combined'
             """
+            super().__init__(log_product)
+
             self.__settings = settings
             self.__format_type = format_type
             self.__preferred_syslog_header = settings.syslog_preferred_headers.get('squid') or None
@@ -5280,13 +5401,17 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
             format_type: str
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             :param format_type: 'common' or 'combined'
             """
+            super().__init__(log_product)
+
             self.__settings = settings
             self.__format_type = format_type
             self.__preferred_syslog_header = settings.syslog_preferred_headers.get('apache-httpd') or None
@@ -5341,11 +5466,15 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             """
+            super().__init__(log_product)
+
             self.__settings = settings
             self.__preferred_syslog_header = settings.syslog_preferred_headers.get('bind') or None
 
@@ -5389,15 +5518,19 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
             host_ip: str | None,
             host_name: str | None,
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             :param host_ip: The IP address of the DHCP server.
             :param host_name: The host name of the DHCP server.
             """
+            super().__init__(log_product)
+
             self.__settings = settings
             self.__host_ip = host_ip
             self.__host_name = host_name
@@ -5483,13 +5616,17 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
             log_type: str
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             :param log_type: 'ad'
             """
+            super().__init__(log_product)
+
             if log_type not in ('ad'):
                 raise DemistoException(f'Invalid log type - {log_type}')
 
@@ -5709,13 +5846,17 @@ script:
         def __init__(
             self,
             settings: Settings,
+            log_product: str,
             variables: Variables,
         ) -> None:
             """ Initialize the instance
 
             :param settings: The instance settings.
+            :param log_product: The log product.
             :param variables: The variables.
             """
+            super().__init__(log_product)
+
             self.__settings = settings
             self.__variables = variables
             self.__preferred_syslog_header = settings.syslog_preferred_headers.get('custom') or None
@@ -6541,17 +6682,17 @@ script:
             match self.__product:
                 case 'checkpoint-fw':
                     self.__generators = [
-                        CheckPointLogGenerator(settings, 'traffic')
+                        CheckPointLogGenerator(settings, self.__product, 'traffic')
                     ]
 
                 case 'fortigate':
                     self.__generators = [
-                        FortiGateLogGenerator(settings, 'traffic')
+                        FortiGateLogGenerator(settings, self.__product, 'traffic')
                     ]
 
                 case 'ngfw':
                     self.__generators = [
-                        NGFWLogGenerator(settings, log_type)
+                        NGFWLogGenerator(settings, self.__product, log_type)
                         for log_type in to_set(
                             demisto.get(service, 'ngfw.log_type') or ['traffic', 'url']
                         )
@@ -6561,6 +6702,7 @@ script:
                     self.__generators = [
                         SquidLogGenerator(
                             settings,
+                            self.__product,
                             log_format,
                         ) for log_format in to_set(
                             demisto.get(service, 'squid.log_format') or 'combined'
@@ -6569,13 +6711,14 @@ script:
 
                 case 'zscaler-nssweb':
                     self.__generators = [
-                        ZscalerLogGenerator(settings, 'web')
+                        ZscalerLogGenerator(settings, self.__product, 'web')
                     ]
 
                 case 'apache-httpd':
                     self.__generators = [
                         ApacheHttpdLogGenerator(
                             settings,
+                            self.__product,
                             log_format,
                         ) for log_format in to_set(
                             demisto.get(service, 'apache-httpd.log_format') or 'combined'
@@ -6584,13 +6727,14 @@ script:
 
                 case 'bind':
                     self.__generators = [
-                        BindLogGenerator(settings)
+                        BindLogGenerator(settings, self.__product)
                     ]
 
                 case 'windows-dhcp':
                     self.__generators = [
                         WindowsDHCPLogGenerator(
                             settings=settings,
+                            product=self.__product,
                             host_ip=self.__ip,
                             host_name=self.__host or None
                         )
@@ -9802,7 +9946,11 @@ script:
             :param generators: List of log generators.
             :param props: Source properties to generate logs.
             """
+            log_product_allowlist = self.__settings.log_product_allowlist
             for generator in generators:
+                if log_product_allowlist and generator.log_product not in log_product_allowlist:
+                    continue
+
                 log_encoder_iter = generator.generate(props)
                 while True:
                     try:
@@ -10095,21 +10243,23 @@ script:
                         case 'ngfw-threat':
                             if props := await self.__props_generator.generate(template.template):
                                 await self.__generate_and_send_log(
-                                    [NGFWLogGenerator(self.__settings, 'threat')],
+                                    [NGFWLogGenerator(self.__settings, 'ngfw', 'threat')],
                                     props
                                 )
 
                         case 'windows-event-ad':
                             if props := await self.__props_generator.generate(template.template):
                                 await self.__generate_and_send_log(
-                                    [WindowsEventLogGenerator(self.__settings, 'ad')],
+                                    [WindowsEventLogGenerator(self.__settings, 'windows-event', 'ad')],
                                     props
                                 )
 
                         case 'custom':
                             if props := await self.__props_generator.generate(template.template):
+                                log_product = (props.get('cef_product') or 'unknown').lower()
+
                                 await self.__generate_and_send_log(
-                                    [CustomLogGenerator(self.__settings, template.variables)],
+                                    [CustomLogGenerator(self.__settings, f'custom-{log_product}', template.variables)],
                                     props
                                 )
 
@@ -11020,8 +11170,10 @@ script:
     if __name__ in ('__main__', '__builtin__', 'builtins'):
         main()
   type: python
-  dockerimage: demisto/py3-tools:1.0.0.5312700
+  dockerimage: demisto/py3-tools:1.0.0.12408181
   subtype: python3
   runonce: false
   longRunning: true
 sourcemoduleid: ExportIndicators
+signature: ""
+restrictioncenter: {}
