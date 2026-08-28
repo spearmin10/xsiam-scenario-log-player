@@ -6734,7 +6734,7 @@ script:
                     self.__generators = [
                         WindowsDHCPLogGenerator(
                             settings=settings,
-                            product=self.__product,
+                            log_product=self.__product,
                             host_ip=self.__ip,
                             host_name=self.__host or None
                         )
